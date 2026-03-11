@@ -1,23 +1,30 @@
 import asyncio
-import websockets
 import json
+import logging
+import os
 
 import gymnasium as gym
+import websockets
 
 X_POS_ADDRESS, Y_POS_ADDRESS = 0xD362, 0xD361
 MAP_N_ADDRESS = 0xD35E
 
+logging.basicConfig(
+    filename=os.path.join(os.path.dirname(__file__), "logs/stream_wrapper.log"),
+    level=logging.DEBUG,
+    format="%(asctime)s [pid %(process)d] %(levelname)s: %(message)s",
+)
+
+
 class StreamWrapper(gym.Wrapper):
     def __init__(self, env, stream_metadata={}):
         super().__init__(env)
-        self.ws_address = "wss://transdimensional.xyz/broadcast"
+        self.ws_address = "ws://pokerl-map-viz:3344/broadcast"
         self.stream_metadata = stream_metadata
         self.loop = asyncio.new_event_loop()
         asyncio.set_event_loop(self.loop)
         self.websocket = None
-        self.loop.run_until_complete(
-            self.establish_wc_connection()
-        )
+        self.loop.run_until_complete(self.establish_wc_connection())
         self.upload_interval = 300
         self.steam_step_counter = 0
         self.env = env
@@ -37,14 +44,13 @@ class StreamWrapper(gym.Wrapper):
         self.coord_list.append([x_pos, y_pos, map_n])
 
         if self.steam_step_counter >= self.upload_interval:
-            self.stream_metadata["extra"] = f"coords: {len(self.env.seen_coords)}"
+            self.stream_metadata["extra"] = (
+                f"coords: {len(getattr(self.env, 'seen_coords', {}))}"
+            )
             self.loop.run_until_complete(
                 self.broadcast_ws_message(
                     json.dumps(
-                        {
-                          "metadata": self.stream_metadata,
-                          "coords": self.coord_list
-                        }
+                        {"metadata": self.stream_metadata, "coords": self.coord_list}
                     )
                 )
             )
@@ -61,11 +67,13 @@ class StreamWrapper(gym.Wrapper):
         if self.websocket is not None:
             try:
                 await self.websocket.send(message)
-            except websockets.exceptions.WebSocketException as e:
+            except websockets.exceptions.WebSocketException:
                 self.websocket = None
 
     async def establish_wc_connection(self):
         try:
             self.websocket = await websockets.connect(self.ws_address)
-        except:
+            logging.info("Connection succeeded")
+        except Exception as e:
+            logging.error(f"Connection failed: {e}")
             self.websocket = None

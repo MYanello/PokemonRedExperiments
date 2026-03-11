@@ -1,7 +1,7 @@
 # adapted from https://github.com/thatguy11325/pokemonred_puffer/blob/main/pokemonred_puffer/global_map.py
 
-import os
 import json
+import os
 
 MAP_PATH = os.path.join(os.path.dirname(__file__), "map_data.json")
 PAD = 20
@@ -12,6 +12,7 @@ MAP_COL_OFFSET = PAD
 with open(MAP_PATH) as map_data:
     MAP_DATA = json.load(map_data)["regions"]
 MAP_DATA = {int(e["id"]): e for e in MAP_DATA}
+
 
 # Handle KeyErrors
 def local_to_global(r: int, c: int, map_n: int):

@@ -1,0 +1,34 @@
+[project]
+name = "pokemon-red-experiments"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    # core RL
+    "stable-baselines3>=2.3.2",
+    "gymnasium>=0.29.1",
+    # emulator
+    "pyboy>=2.4.0",
+    "pysdl2>=0.9.16",
+    "pysdl2-dll>=2.30.2",
+    # neural net
+    "torch>=2.7.0",
+    # observation processing
+    "numpy>=2.1.2",
+    "einops>=0.8.0",
+    "scikit-image>=0.24.0",
+    # rendering / video
+    "matplotlib>=3.9.2",
+    "mediapy>=1.2.2",
+    "pillow>=11.0.0",
+    # logging
+    "tensorboard>=2.18.0",
+    "pandas>=2.2.3",
+    "websockets>=13.1",
+    "wandb>=0.25.1",
+]
+
+[tool.pyright]
+reportMissingTypeStubs = false
+reportUnknownVariableType = false
+reportMissingTypeArgument = false
+reportUnknownMemberType = false

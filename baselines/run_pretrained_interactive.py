@@ -7,6 +7,7 @@ from stable_baselines3.common import env_checker
 from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv
 from stable_baselines3.common.utils import set_random_seed
 from stable_baselines3.common.callbacks import CheckpointCallback
+from stream_agent_wrapper import StreamWrapper
 
 def make_env(rank, env_conf, seed=0):
     """
@@ -19,6 +20,15 @@ def make_env(rank, env_conf, seed=0):
     def _init():
         env = RedGymEnv(env_conf)
         #env.seed(seed + rank)
+        env = StreamWrapper(
+            env,
+            stream_metadata = {
+                "user": "marcus",
+                "env_id": rank,
+                "color": "#0033ff",
+                "extra": "",
+            }
+        )
         return env
     set_random_seed(seed)
     return _init
@@ -29,7 +39,7 @@ if __name__ == '__main__':
     ep_length = 2**23
 
     env_config = {
-                'headless': False, 'save_final_state': True, 'early_stop': False,
+                'headless': True, 'save_final_state': True, 'early_stop': False,
                 'action_freq': 24, 'init_state': '../has_pokedex_nballs.state', 'max_steps': ep_length, 
                 'print_rewards': True, 'save_video': False, 'fast_video': True, 'session_path': sess_path,
                 'gb_path': '../PokemonRed.gb', 'debug': False, 'sim_frame_dist': 2_000_000.0, 'extra_buttons': True

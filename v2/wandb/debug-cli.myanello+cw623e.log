@@ -1,0 +1,98 @@
+2026-03-11 18:06:58 INFO watching files in: /tmp/tmpyuza1n_f/files
+2026-03-11 18:06:58 INFO run started: 3vpc3dfs with start time 0.0
+2026-03-11 18:06:59 INFO file/dir created: /tmp/tmpyuza1n_f/wandb/run-20260311_180655-3vpc3dfs/files/poke_ppo_4/events.out.tfevents.1773249145.slurm-rtx6000-244-175.129556.0
+2026-03-11 18:06:59 INFO file/dir created: /tmp/tmpyuza1n_f/wandb/run-20260311_180655-3vpc3dfs/files/poke_ppo_4
+2026-03-11 18:06:59 ERROR Error executing GraphQL.
+Traceback (most recent call last):
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/wandb/sdk/internal/internal_api.py", line 394, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/wandb/sdk/lib/gql_request.py", line 71, in execute
+    request.raise_for_status()
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.wandb.ai/graphql
+2026-03-11 18:06:59 ERROR Failed to upload file: /tmp/tmpz_zgf1jqwandb/2kvq3u0g-poke_ppo_4/events.out.tfevents.1773249145.slurm-rtx6000-244-175.129556.0
+Traceback (most recent call last):
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/wandb/apis/normalize.py", line 28, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/wandb/sdk/internal/internal_api.py", line 2652, in upload_urls
+    query_result = self.gql(
+                   ^^^^^^^^^
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/wandb/sdk/internal/internal_api.py", line 364, in gql
+    ret = self._retry_gql(
+          ^^^^^^^^^^^^^^^^
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/wandb/sdk/lib/retry.py", line 160, in __call__
+    result = self._call_fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/wandb/sdk/internal/internal_api.py", line 394, in execute
+    return self.client.execute(*args, **kwargs)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/wandb/vendor/gql-0.2.0/wandb_gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/wandb/sdk/lib/gql_request.py", line 71, in execute
+    request.raise_for_status()
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 404 Client Error: Not Found for url: https://api.wandb.ai/graphql
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/mnt/home/myanello+cw623e/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/wandb/filesync/step_upload.py", line 214, in run_and_notify
+    self._do_upload(event)
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/wandb/filesync/step_upload.py", line 234, in _do_upload
+    job.run()
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/wandb/filesync/upload_job.py", line 59, in run
+    self.push()
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/wandb/filesync/upload_job.py", line 108, in push
+    _, upload_headers, result = self._api.upload_urls(project, [self.save_name])
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/data/PokemonRedExperiments/v2/.venv/lib/python3.12/site-packages/wandb/apis/normalize.py", line 45, in wrapper
+    raise CommError(message, error)
+wandb.errors.errors.CommError: HTTP 404: run PokemonRedExperiments/3vpc3dfs not found during createRunFiles
+2026-03-11 18:07:07 INFO saving file poke_ppo_4/events.out.tfevents.1773249145.slurm-rtx6000-244-175.129556.0 with policy live
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO saving file wandb-summary.json with policy end
+2026-03-11 18:07:07 INFO shutting down handler
+2026-03-11 18:07:07 INFO shutting down sender
+2026-03-11 18:07:07 INFO shutting down directory watcher
+2026-03-11 18:07:08 INFO scan: /tmp/tmpyuza1n_f/wandb/run-20260311_180655-3vpc3dfs/files
+2026-03-11 18:07:08 INFO scan save: /tmp/tmpyuza1n_f/wandb/run-20260311_180655-3vpc3dfs/files/poke_ppo_4/events.out.tfevents.1773249145.slurm-rtx6000-244-175.129556.0 poke_ppo_4/events.out.tfevents.1773249145.slurm-rtx6000-244-175.129556.0
+2026-03-11 18:07:08 INFO shutting down file pusher
+2026-03-11 18:07:08 INFO waiting for file pusher
+2026-03-11 18:07:09 INFO file stream finish called
+2026-03-11 18:07:10 INFO file stream finish is done

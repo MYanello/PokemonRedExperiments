@@ -1,0 +1,81 @@
+{
+  "os": "Linux-6.8.12-680-6063-coreweave-amd64-f81899c8-x86_64-with-glibc2.35",
+  "python": "CPython 3.12.13",
+  "startedAt": "2026-03-11T18:01:08.104796Z",
+  "program": "/mnt/data/PokemonRedExperiments/v2/baseline_fast_v2.py",
+  "codePath": "v2/baseline_fast_v2.py",
+  "codePathLocal": "baseline_fast_v2.py",
+  "git": {
+    "remote": "https://github.com/PWhiddy/PokemonRedExperiments.git",
+    "commit": "7739b399db503a7a78999683188414036a2c0c6b"
+  },
+  "email": "myanello@coreweave.com",
+  "root": "/mnt/data/PokemonRedExperiments/v2",
+  "host": "slurm-rtx6000-244-175",
+  "executable": "/mnt/data/PokemonRedExperiments/v2/.venv/bin/python",
+  "cpu_count": 64,
+  "cpu_count_logical": 128,
+  "gpu": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+  "gpu_count": 1,
+  "disk": {
+    "/": {
+      "total": "7679212060672",
+      "used": "320012062720"
+    }
+  },
+  "memory": {
+    "total": "1080661270528"
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA RTX PRO 6000 Blackwell Server Edition",
+      "memoryTotal": "102641958912",
+      "cudaCores": 24064,
+      "architecture": "Blackwell",
+      "uuid": "GPU-080812b6-8fa5-de25-2be6-8fbeac9e7260"
+    }
+  ],
+  "cudaVersion": "13.0",
+  "slurm": {
+    "cluster_name": "slurm",
+    "conf": "/etc/slurm/slurm.conf",
+    "cpus_on_node": "64",
+    "cpus_per_task": "64",
+    "gpus": "1",
+    "gpus_on_node": "1",
+    "gtids": "0",
+    "job_account": "cw-sup",
+    "job_cpus_per_node": "64",
+    "job_end_time": "1773338435",
+    "job_gid": "100001",
+    "job_gpus": "0",
+    "job_id": "397",
+    "job_name": "pokemon-rl",
+    "job_nodelist": "slurm-rtx6000-244-175",
+    "job_num_nodes": "1",
+    "job_partition": "all",
+    "job_qos": "normal",
+    "job_start_time": "1773252035",
+    "job_uid": "100001",
+    "job_user": "myanello+cw623e",
+    "jobid": "397",
+    "localid": "0",
+    "mem_per_cpu": "4096",
+    "nnodes": "1",
+    "nodeid": "0",
+    "nodelist": "slurm-rtx6000-244-175",
+    "nprocs": "1",
+    "ntasks": "1",
+    "oom_kill_step": "0",
+    "prio_process": "0",
+    "procid": "0",
+    "submit_dir": "/mnt/data/PokemonRedExperiments/v2",
+    "submit_host": "slurm-login-0",
+    "task_pid": "183899",
+    "tasks_per_node": "1",
+    "topology_addr": "slurm-rtx6000-244-175",
+    "topology_addr_pattern": "node",
+    "tres_per_task": "cpu=64"
+  },
+  "writerId": "hhon44we8agcyft23ivqcco2m7s2io72"
+}
