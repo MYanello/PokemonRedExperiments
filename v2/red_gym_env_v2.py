@@ -32,8 +32,8 @@ class EnvConfig(TypedDict):
     max_steps: int
     save_video: bool
     fast_video: bool
-    reward_scale: NotRequired[int]
-    explore_weight: NotRequired[int]
+    reward_scale: NotRequired[float]
+    explore_weight: NotRequired[float]
     instance_id: NotRequired[str]
     early_stop: NotRequired[bool]
     sim_frame_dist: NotRequired[float]
@@ -55,8 +55,8 @@ class RedGymEnv(Env):
         self.save_video: bool = config["save_video"]
         self.fast_video: bool = config["fast_video"]
         self.frame_stacks: int = 3
-        self.explore_weight: int = config.get("explore_weight", 1)
-        self.reward_scale: int = config.get("reward_scale", 1)
+        self.explore_weight: float = config.get("explore_weight", 1)
+        self.reward_scale: float = config.get("reward_scale", 1)
         self.instance_id: str = config.get("instance_id", str(uuid.uuid4())[:8])
         self.full_frame_writer: media.VideoWriter | None = None
         self.model_frame_writer: media.VideoWriter | None = None

@@ -36,6 +36,7 @@ reportUnknownParameterType = false
 reportUnusedParameter = false
 reportUnusedCallResult = false
 reportIncompatibleVariableOverride = false
+reportExplicitAny = false
 
 [tool.ruff]
 line-length=160
