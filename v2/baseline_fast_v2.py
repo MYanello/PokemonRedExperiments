@@ -3,16 +3,18 @@ from os.path import exists
 from pathlib import Path
 
 from stable_baselines3 import PPO
-from stable_baselines3.common.callbacks import CallbackList, CheckpointCallback
+from stable_baselines3.common.callbacks import BaseCallback, CallbackList, CheckpointCallback
 from stable_baselines3.common.utils import set_random_seed
 from stable_baselines3.common.vec_env import SubprocVecEnv
+from wandb.integration.sb3 import WandbCallback
 
+import wandb
 from red_gym_env_v2 import RedGymEnv
 from stream_agent_wrapper import StreamWrapper
 from tensorboard_callback import TensorboardCallback
 
 
-def make_env(rank, env_conf, seed=0):
+def make_env(rank: int, env_conf: dict, seed: int = 0):
     """
     Utility function for multiprocessed env.
     :param env_id: (str) the environment ID
@@ -32,7 +34,7 @@ def make_env(rank, env_conf, seed=0):
                 "sprite_id": 10,
             },
         )
-        env.reset(seed=(seed + rank))
+        _ = env.reset(seed=(seed + rank))
         return env
 
     set_random_seed(seed)
@@ -67,17 +69,12 @@ if __name__ == "__main__":
     num_cpu = 64  # Also sets the number of episodes per training iteration
     env = SubprocVecEnv([make_env(i, env_config) for i in range(num_cpu)])
 
-    checkpoint_callback = CheckpointCallback(
-        save_freq=ep_length // 2, save_path=str(sess_path), name_prefix="poke"
-    )
+    checkpoint_callback = CheckpointCallback(save_freq=ep_length // 2, save_path=str(sess_path), name_prefix="poke")
 
-    callbacks = [checkpoint_callback, TensorboardCallback(sess_path)]
+    callbacks: list[BaseCallback] = [checkpoint_callback, TensorboardCallback(sess_path)]
 
+    run = None
     if use_wandb_logging:
-        from wandb.integration.sb3 import WandbCallback
-
-        import wandb
-
         run = wandb.init(
             project="pokemon-train",
             id=sess_id,
@@ -128,5 +125,5 @@ if __name__ == "__main__":
         tb_log_name="poke_ppo",
     )
 
-    if use_wandb_logging:
+    if run is not None:
         run.finish()

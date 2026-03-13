@@ -1307,11 +1307,6 @@ dependencies = [
     { name = "websockets" },
 ]
 
-[package.optional-dependencies]
-wandb = [
-    { name = "wandb" },
-]
-
 [package.metadata]
 requires-dist = [
     { name = "einops", specifier = ">=0.8.0" },
@@ -1329,10 +1324,8 @@ requires-dist = [
     { name = "tensorboard", specifier = ">=2.18.0" },
     { name = "torch", specifier = ">=2.7.0" },
     { name = "wandb", specifier = ">=0.25.1" },
-    { name = "wandb", marker = "extra == 'wandb'" },
     { name = "websockets", specifier = ">=13.1" },
 ]
-provides-extras = ["wandb"]
 
 [[package]]
 name = "prompt-toolkit"

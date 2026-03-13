@@ -159,7 +159,7 @@ class RedGymEnv(Env):
         self.total_reward: float = 0
 
     @override
-    def reset(self, *, seed: int | None = 0, options: dict | None = None):
+    def reset(self, *, seed: int | None = 0, options: dict | None = None) -> tuple[dict[str, np.ndarray], dict]:
         if seed:
             self.seed = seed
         # restart game, skipping credits
@@ -199,7 +199,7 @@ class RedGymEnv(Env):
         self.progress_reward = self.get_game_state_reward()
         self.total_reward = sum([val for _, val in self.progress_reward.items()])
         self.reset_count += 1
-        return self._get_obs(), {}
+        return self.get_obs(), {}
 
     def init_map_mem(self) -> None:
         self.seen_coords = {}
@@ -211,7 +211,7 @@ class RedGymEnv(Env):
             game_pixels_render = (downscale_local_mean(game_pixels_render, (2, 2, 1))).astype(np.uint8)
         return game_pixels_render
 
-    def _get_obs(self):
+    def get_obs(self) -> dict[str, np.ndarray]:
         screen = self.render()
 
         self.update_recent_screens(screen)
@@ -257,7 +257,7 @@ class RedGymEnv(Env):
 
         step_limit_reached = self.check_if_done()
 
-        obs = self._get_obs()
+        obs = self.get_obs()
 
         # self.save_and_print_info(step_limit_reached, obs)
 
