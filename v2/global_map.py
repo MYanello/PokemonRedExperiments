@@ -2,6 +2,7 @@
 
 import json
 import os
+from typing import TypedDict, cast
 
 MAP_PATH = os.path.join(os.path.dirname(__file__), "map_data.json")
 PAD = 20
@@ -9,13 +10,21 @@ GLOBAL_MAP_SHAPE = (444 + PAD * 2, 436 + PAD * 2)
 MAP_ROW_OFFSET = PAD
 MAP_COL_OFFSET = PAD
 
+
+class MapRegion(TypedDict):
+    id: str
+    name: str
+    coordinates: list[int]
+    tileSize: list[int]
+
+
 with open(MAP_PATH) as map_data:
-    MAP_DATA = json.load(map_data)["regions"]
-MAP_DATA = {int(e["id"]): e for e in MAP_DATA}
+    map_raw = cast(list[MapRegion], json.load(map_data)["regions"])
+MAP_DATA = {int(e["id"]): e for e in map_raw}
 
 
 # Handle KeyErrors
-def local_to_global(r: int, c: int, map_n: int):
+def local_to_global(r: int, c: int, map_n: int) -> tuple[int, int]:
     try:
         (
             map_x,

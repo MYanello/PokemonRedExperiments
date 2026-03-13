@@ -32,3 +32,10 @@ reportMissingTypeStubs = false
 reportUnknownVariableType = false
 reportMissingTypeArgument = false
 reportUnknownMemberType = false
+reportUnknownParameterType = false
+reportUnusedParameter = false
+reportUnusedCallResult = false
+reportIncompatibleVariableOverride = false
+
+[tool.ruff]
+line-length=160
