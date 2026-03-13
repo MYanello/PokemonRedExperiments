@@ -153,7 +153,7 @@ class RedGymEnv(Env):
         self.party_size: int = 0
         self.step_count: int = 0
         self.base_event_flags: int = 0
-        self.current_event_flags_set: dict = {}
+        self.current_event_flags_set: dict[str, str] = {}
         self.max_map_progress: int = 0
         self.progress_reward: dict[str, float] = {}
         self.total_reward: float = 0

@@ -1,4 +1,5 @@
 import sys
+from datetime import UTC, datetime
 from os.path import exists
 from pathlib import Path
 from typing import Any, cast
@@ -79,7 +80,7 @@ if __name__ == "__main__":
         run = wandb.init(
             project="pokemon-train",
             id=sess_id,
-            name="v2-a",
+            name=f"v2-{datetime.now(UTC).strftime('%Y%m%d-%H%M%S')}",
             config=cast(dict[str, Any], cast(object, env_config)),  # pyright is fussy here, double cast
             sync_tensorboard=True,
             monitor_gym=True,
