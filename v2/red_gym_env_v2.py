@@ -22,6 +22,28 @@ museum_ticket = (0xD754, 0)
 
 
 class EnvConfig(TypedDict):
+    """Configuration dictionary for RedGymEnv.
+
+    Attributes:
+        session_path: Directory used to persist checkpoints, frames, and videos.
+        gb_path: Path to the Pokemon Red ROM file.
+        init_state: Path to the saved Game Boy state file to load on reset.
+        save_final_state: Whether to save screenshots of the final episode frame.
+        print_rewards: Whether to print live reward progress to stdout.
+        headless: Whether to run PyBoy without a display window.
+        action_freq: Number of emulator ticks to execute per agent action.
+        max_steps: Maximum number of steps before the episode is truncated.
+        save_video: Whether to record MP4 rollout videos.
+        fast_video: Whether to write one video frame per action rather than per tick.
+        reward_scale: Global scalar multiplier applied to all reward components.
+        explore_weight: Multiplier applied specifically to the exploration reward.
+        instance_id: Short identifier string used to label output files.
+        early_stop: Whether to allow early episode termination.
+        sim_frame_dist: Similarity threshold used for frame-distance early stopping.
+        extra_buttons: Whether to include additional controller buttons in the action space.
+        debug: Whether to enable verbose debug output.
+    """
+
     session_path: Path
     gb_path: str
     init_state: str
@@ -42,18 +64,33 @@ class EnvConfig(TypedDict):
 
 
 class RedGymEnv(Env):
+    """Gymnasium environment wrapping Pokemon Red via the PyBoy emulator.
+
+    Implements the standard `gymnasium.Env` interface so the environment can
+    be used directly with any RL framework that targets the Gymnasium API.
+    """
+
     def __init__(self, config: EnvConfig):
+        """Initializes all environment state and starts the PyBoy emulator.
+
+        Loads event names from `events.json`, builds the action and observation
+        spaces, and declares every episode-level attribute so that type checkers
+        can reason about the class without requiring a prior call to `reset`.
+
+        Args:
+            config: An `EnvConfig` dict containing all runtime settings.
+        """
         self.s_path: Path = config["session_path"]
         _ = self.s_path.mkdir(exist_ok=True)
 
-        self.save_final_state: bool = config["save_final_state"]
-        self.print_rewards: bool = config["print_rewards"]
-        self.headless: bool = config["headless"]
-        self.init_state: str = config["init_state"]
-        self.act_freq: int = config["action_freq"]
-        self.max_steps: int = config["max_steps"]
-        self.save_video: bool = config["save_video"]
-        self.fast_video: bool = config["fast_video"]
+        self.save_final_state: bool = config.get("save_final_state", False)
+        self.print_rewards: bool = config.get("print_rewards", False)
+        self.headless: bool = config.get("headless", True)
+        self.init_state: str = config.get("init_state", "../init.stat")
+        self.act_freq: int = config.get("action_freq", 24)
+        self.max_steps: int = config.get("max_steps", 163840)
+        self.save_video: bool = config.get("save_video", False)
+        self.fast_video: bool = config.get("fast_video", True)
         self.frame_stacks: int = 3
         self.explore_weight: float = config.get("explore_weight", 1)
         self.reward_scale: float = config.get("reward_scale", 1)
@@ -160,6 +197,16 @@ class RedGymEnv(Env):
 
     @override
     def reset(self, *, seed: int | None = 0, options: dict | None = None) -> tuple[dict[str, np.ndarray], dict]:
+        """Loads the saved game state and resets all episode statistics.
+
+        Args:
+            seed: Optional RNG seed stored on the instance for reproducibility.
+            options: Unused; present for Gymnasium API compatibility.
+
+        Returns:
+            A tuple of `(observation, info)` where `observation` is the
+            initial obs dict and `info` is an empty dict.
+        """
         if seed:
             self.seed = seed
         # restart game, skipping credits
@@ -206,12 +253,36 @@ class RedGymEnv(Env):
 
     @override
     def render(self, reduce_res: bool = True) -> np.ndarray:
+        """Returns the current game screen as a grayscale numpy array.
+
+        Args:
+            reduce_res: When `True`, downscales the native 144x160 frame 2x
+                to 72x80 using local-mean pooling.
+
+        Returns:
+            A `(H, W, 1)` uint8 array of pixel intensities.
+        """
         game_pixels_render = self.pyboy.screen.ndarray[:, :, 0:1]  # (144, 160, 3)
         if reduce_res:
             game_pixels_render = (downscale_local_mean(game_pixels_render, (2, 2, 1))).astype(np.uint8)
         return game_pixels_render
 
     def get_obs(self) -> dict[str, np.ndarray]:
+        """Builds and returns the current observation dictionary.
+
+        The dictionary contains the following keys:
+
+        * `screens` — stacked grayscale frames `(72, 80, frame_stacks)`.
+        * `health` — party HP fraction as a length-1 float array.
+        * `level` — Fourier encoding of the normalised party level sum.
+        * `badges` — 8-bit binary array of obtained badges.
+        * `events` — flat binary array of all event flags.
+        * `map` — explore-map patch centred on the player `(coords_pad*4, coords_pad*4, 1)`.
+        * `recent_actions` — last `frame_stacks` action indices.
+
+        Returns:
+            A dict mapping observation key strings to numpy arrays.
+        """
         screen = self.render()
 
         self.update_recent_screens(screen)
@@ -232,7 +303,21 @@ class RedGymEnv(Env):
         return observation
 
     @override
-    def step(self, action: int):
+    def step(self, action: int) -> tuple[dict[str, np.ndarray], float, bool, bool, dict]:
+        """Advances the environment by one action.
+
+        Executes the action on the emulator, updates all state-tracking
+        bookkeeping (coordinates, explore map, heal reward, etc.), computes
+        the reward delta, and checks the step-limit termination condition.
+
+        Args:
+            action: Index into `valid_actions` identifying the button to press.
+
+        Returns:
+            A tuple `(obs, reward, terminated, truncated, info)` where
+            `terminated` is always `False` (episodes end via truncation
+            only) and `info` is an empty dict.
+        """
         if self.save_video and self.step_count == 0:
             self.start_video()
 
@@ -280,6 +365,16 @@ class RedGymEnv(Env):
         return obs, new_reward, False, step_limit_reached, {}
 
     def run_action_on_emulator(self, action: int) -> None:
+        """Sends a button press to PyBoy and ticks the emulator for the full action frequency.
+
+        The button is held for 8 ticks then released for the remaining
+        `act_freq - 9` ticks, with a final tick rendered unconditionally.
+        A video frame is captured after the last tick when `fast_video` is
+        enabled.
+
+        Args:
+            action: Index into `valid_actions` identifying the button to press.
+        """
         # press button then release after some steps
         self.pyboy.send_input(self.valid_actions[action])
         # disable rendering when we don't need it
@@ -293,6 +388,14 @@ class RedGymEnv(Env):
             self.add_video_frame()
 
     def append_agent_stats(self, action: int) -> None:
+        """Appends a snapshot of the current game state to `agent_stats`.
+
+        Each snapshot is a dict containing position, map progress, action,
+        party levels and HP, badge count, event progress, and heal reward.
+
+        Args:
+            action: The action index that was just executed.
+        """
         x_pos, y_pos, map_n = self.get_game_coords()
         levels = [self.read_m(a) for a in [0xD18C, 0xD1B8, 0xD1E4, 0xD210, 0xD23C, 0xD268]]
         self.agent_stats.append(
@@ -317,6 +420,14 @@ class RedGymEnv(Env):
         )
 
     def start_video(self) -> None:
+        """Closes any existing video writers and opens new ones for the current episode.
+
+        Creates three MP4 writers in `session_path/rollouts/`:
+
+        * `full_*` — native 144x160 full-resolution frames.
+        * `model_*` — downscaled 72x80 model-input frames.
+        * `map_*` — explore-map patch frames.
+        """
         if self.full_frame_writer is not None:
             self.full_frame_writer.close()
         if self.model_frame_writer is not None:
@@ -342,6 +453,7 @@ class RedGymEnv(Env):
         self.map_frame_writer.__enter__()
 
     def add_video_frame(self) -> None:
+        """Writes the current screen and map to all three open video writers."""
         if self.full_frame_writer:
             self.full_frame_writer.add_image(self.render(reduce_res=False)[:, :, 0])
         if self.model_frame_writer:
@@ -350,9 +462,20 @@ class RedGymEnv(Env):
             self.map_frame_writer.add_image(self.get_explore_map())
 
     def get_game_coords(self) -> tuple[int, int, int]:
+        """Reads the player's current position and map number from RAM.
+
+        Returns:
+            A tuple `(x, y, map_n)` of integers read from addresses
+            `0xD362`, `0xD361`, and `0xD35E` respectively.
+        """
         return (self.read_m(0xD362), self.read_m(0xD361), self.read_m(0xD35E))
 
     def update_seen_coords(self) -> None:
+        """Records the current coordinate in `seen_coords` when not in battle.
+
+        Increments the visit count for the coordinate string if it has been
+        visited before, or initialises it to 1 on the first visit.
+        """
         # if not in battle
         if self.read_m(0xD057) == 0:
             x_pos, y_pos, map_n = self.get_game_coords()
@@ -364,6 +487,12 @@ class RedGymEnv(Env):
             # self.seen_coords[coord_string] = self.step_count
 
     def get_current_coord_count_reward(self) -> int:
+        """Returns a stuck-penalty indicator for the current tile.
+
+        Returns:
+            `1` if the current tile has been visited 600 or more times
+            (indicating the agent may be stuck), `0` otherwise.
+        """
         x_pos, y_pos, map_n = self.get_game_coords()
         coord_string = f"x:{x_pos} y:{y_pos} m:{map_n}"
         if coord_string in self.seen_coords.keys():
@@ -373,10 +502,20 @@ class RedGymEnv(Env):
         return 0 if count < 600 else 1
 
     def get_global_coords(self) -> tuple[int, int]:
+        """Converts the player's local map coordinates to global map coordinates.
+
+        Returns:
+            A `(row, col)` tuple in the global map coordinate system.
+        """
         x_pos, y_pos, map_n = self.get_game_coords()
         return local_to_global(y_pos, x_pos, map_n)
 
     def update_explore_map(self) -> None:
+        """Sets the player's current global position to 255 in `explore_map`.
+
+        Logs a warning to stdout if the computed global coordinate is out of
+        bounds for the current map array shape.
+        """
         c = self.get_global_coords()
         if c[0] >= self.explore_map.shape[0] or c[1] >= self.explore_map.shape[1]:
             print(f"coord out of bounds! global: {c} game: {self.get_game_coords()}")
@@ -385,6 +524,14 @@ class RedGymEnv(Env):
             self.explore_map[c[0], c[1]] = 255
 
     def get_explore_map(self) -> np.ndarray:
+        """Returns a `coords_pad*4 x coords_pad*4` view of `explore_map` centred on the player.
+
+        The raw `coords_pad x coords_pad` region is upscaled 2x in each
+        spatial dimension using `einops.repeat`.
+
+        Returns:
+            A 2-D uint8 array of shape `(coords_pad*4, coords_pad*4)`.
+        """
         c = self.get_global_coords()
         if c[0] >= self.explore_map.shape[0] or c[1] >= self.explore_map.shape[1]:
             out = np.zeros((self.coords_pad * 2, self.coords_pad * 2), dtype=np.uint8)
@@ -396,14 +543,31 @@ class RedGymEnv(Env):
         return repeat(out, "h w -> (h h2) (w w2)", h2=2, w2=2)
 
     def update_recent_screens(self, cur_screen: np.ndarray) -> None:
+        """Shifts the frame stack and inserts `cur_screen` at index 0.
+
+        Args:
+            cur_screen: The latest rendered frame with shape `(H, W, 1)`.
+        """
         self.recent_screens = np.roll(self.recent_screens, 1, axis=2)
         self.recent_screens[:, :, 0] = cur_screen[:, :, 0]
 
     def update_recent_actions(self, action: int) -> None:
+        """Shifts the action history buffer and inserts `action` at index 0.
+
+        Args:
+            action: The action index that was just executed.
+        """
         self.recent_actions = np.roll(self.recent_actions, 1)
         self.recent_actions[0] = action
 
     def update_reward(self) -> float:
+        """Recomputes the game-state reward and returns the delta since the last step.
+
+        Updates `progress_reward` and `total_reward` in place.
+
+        Returns:
+            The signed reward delta for the current step.
+        """
         # compute reward
         self.progress_reward = self.get_game_state_reward()
         new_total = sum([val for _, val in self.progress_reward.items()])
@@ -413,6 +577,12 @@ class RedGymEnv(Env):
         return new_step
 
     def group_rewards(self) -> tuple[float, float, float]:
+        """Returns the level, HP, and explore reward components scaled for memory systems.
+
+        Returns:
+            A tuple `(level_reward, hp_reward, explore_reward)` with the
+            scale factors expected by external memory implementations.
+        """
         prog = self.progress_reward
         # these values are only used by memory
         return (
@@ -422,11 +592,27 @@ class RedGymEnv(Env):
         )
 
     def check_if_done(self) -> bool:
+        """Returns `True` when the step count has reached the episode limit.
+
+        Returns:
+            `True` if `step_count >= max_steps - 1`, else `False`.
+        """
         done = self.step_count >= self.max_steps - 1
         # done = self.read_hp_fraction() == 0 # end game on loss
         return done
 
     def save_and_print_info(self, done: bool, obs: dict[str, np.ndarray]) -> None:
+        """Prints reward progress, saves periodic frame snapshots, and handles end-of-episode cleanup.
+
+        Every 50 steps the current frame is saved as a JPEG. When `done` is
+        `True` and `save_final_state` is enabled, explore-map and
+        full-frame JPEGs are written to `session_path/final_states/`. Open
+        video writers are closed when the episode ends.
+
+        Args:
+            done: Whether the episode has just ended.
+            obs: The current observation dict (used to extract the map image).
+        """
         if self.print_rewards:
             prog_string = f"step: {self.step_count:6d}"
             for key, val in self.progress_reward.items():
@@ -467,23 +653,64 @@ class RedGymEnv(Env):
                 self.map_frame_writer.close()
 
     def read_m(self, addr: int) -> int:
+        """Reads a single byte from emulator memory.
+
+        Args:
+            addr: The 16-bit memory address to read.
+
+        Returns:
+            The byte value at `addr` as an integer in `[0, 255]`.
+        """
         # return self.pyboy.get_memory_value(addr)
         return self.pyboy.memory[addr]
 
     def read_bit(self, addr: int, bit: int) -> bool:
+        """Reads a single bit from an emulator memory byte.
+
+        Args:
+            addr: The 16-bit memory address to read.
+            bit: Zero-based bit index (0 = LSB).
+
+        Returns:
+            `True` if the specified bit is set, `False` otherwise.
+        """
         # add padding so zero will read '0b100000000' instead of '0b0'
         return bin(256 + self.read_m(addr))[-bit - 1] == "1"
 
     def read_event_bits(self) -> list[int]:
+        """Returns a flat list of all event flag bits from the event flag memory range.
+
+        Returns:
+            A list of integers (each `0` or `1`) covering every bit between
+            `event_flags_start` and `event_flags_end`.
+        """
         return [int(bit) for i in range(event_flags_start, event_flags_end) for bit in f"{self.read_m(i):08b}"]
 
     def get_levels_sum(self) -> int:
+        """Sums party Pokemon levels above the minimum threshold, with a starter bonus offset.
+
+        Each Pokemon's contribution is `max(level - 2, 0)`. The starter
+        bonus of 4 is then subtracted from the total, and the result is
+        clamped to a minimum of 0.
+
+        Returns:
+            The adjusted integer level sum.
+        """
         min_poke_level = 2
         starter_additional_levels = 4
         poke_levels = [max(self.read_m(a) - min_poke_level, 0) for a in [0xD18C, 0xD1B8, 0xD1E4, 0xD210, 0xD23C, 0xD268]]
         return max(sum(poke_levels) - starter_additional_levels, 0)
 
     def get_levels_reward(self) -> float:
+        """Returns the scaled level reward, tracking the maximum value seen this episode.
+
+        Growth is linear below the explore threshold (22) and compressed by a
+        factor of 4 above it. The running maximum is stored in
+        `max_level_rew` to prevent reward regression.
+
+        Returns:
+            The maximum level reward achieved so far this episode.
+        """
         explore_thresh = 22
         scale_factor = 4
         level_sum = self.get_levels_sum()
@@ -495,12 +722,31 @@ class RedGymEnv(Env):
         return self.max_level_rew
 
     def get_badges(self) -> int:
+        """Returns the number of badges obtained by counting set bits in the badge byte.
+
+        Returns:
+            Integer badge count in the range `[0, 8]`.
+        """
         return self.bit_count(self.read_m(0xD356))
 
     def read_party(self) -> list[int]:
+        """Returns the species IDs of the six party Pokemon.
+
+        Returns:
+            A list of 6 integers read from party memory addresses
+            `0xD164` – `0xD169`.
+        """
         return [self.read_m(addr) for addr in [0xD164, 0xD165, 0xD166, 0xD167, 0xD168, 0xD169]]
 
     def get_all_events_reward(self) -> int:
+        """Counts all event flags set since the start of the episode.
+
+        Subtracts the baseline flag count recorded at reset and excludes the
+        museum ticket flag. The result is clamped to a minimum of 0.
+
+        Returns:
+            The number of newly-set event flags as a non-negative integer.
+        """
         # adds up all event flags, exclude museum ticket
         return max(
             sum([self.bit_count(self.read_m(i)) for i in range(event_flags_start, event_flags_end)])
@@ -510,10 +756,20 @@ class RedGymEnv(Env):
         )
 
     def get_game_state_reward(self, print_stats: bool = False) -> dict[str, float]:
+        """Computes and returns all named reward components for the current game state.
+
+        Args:
+            print_stats: Unused flag reserved for optional debug printing.
+
+        Returns:
+            A dict with keys `"event"`, `"heal"`, `"badge"`,
+            `"explore"`, and `"stuck"`, each mapped to its scaled float
+            value.
+        """
         # addresses from https://datacrystal.romhacking.net/wiki/Pok%C3%A9mon_Red/Blue:RAM_map
         # https://github.com/pret/pokered/blob/91dc3c9f9c8fd529bb6e8307b58b96efa0bec67e/constants/event_constants.asm
         state_scores = {
-            "event": self.reward_scale * self.update_max_event_rew() * 4,
+            "event": self.reward_scale * self.update_max_event_reward() * 4,
             # "level": self.reward_scale * self.get_levels_reward(),
             "heal": self.reward_scale * self.total_healing_rew * 10,
             # "op_lvl": self.reward_scale * self.update_max_op_level() * 0.2,
@@ -526,17 +782,35 @@ class RedGymEnv(Env):
         return state_scores
 
     def update_max_op_level(self) -> int:
+        """Reads opponent party levels, updates, and returns the episode maximum.
+
+        A base level offset of 5 is subtracted before the comparison.
+
+        Returns:
+            The highest opponent level seen so far this episode.
+        """
         opp_base_level = 5
         opponent_level = max([self.read_m(a) for a in [0xD8C5, 0xD8F1, 0xD91D, 0xD949, 0xD975, 0xD9A1]]) - opp_base_level
         self.max_opponent_level = max(self.max_opponent_level, opponent_level)
         return self.max_opponent_level
 
-    def update_max_event_rew(self) -> float:
+    def update_max_event_reward(self) -> float:
+        """Updates and returns the maximum event reward seen so far this episode.
+
+        Returns:
+            The running maximum of `get_all_events_reward()` across all steps.
+        """
         cur_rew = self.get_all_events_reward()
         self.max_event_rew = max(cur_rew, self.max_event_rew)
         return self.max_event_rew
 
     def update_heal_reward(self) -> None:
+        """Updates the cumulative healing reward based on HP change since the last step.
+
+        When HP increases without a party size change, the heal amount squared
+        is added to `total_healing_rew`. A full blackout (HP was 0 before
+        recovery) increments `died_count` instead.
+        """
         cur_health = self.read_hp_fraction()
         # if health increased and party size did not change
         if cur_health > self.last_health and self.read_m(0xD163) == self.party_size:
@@ -547,26 +821,69 @@ class RedGymEnv(Env):
                 self.died_count += 1
 
     def read_hp_fraction(self) -> float:
+        """Returns the current HP fraction across the whole party.
+
+        Returns:
+            A float in `[0.0, 1.0]` representing total current HP divided by
+            total maximum HP (clamped to at least 1 to avoid division by zero).
+        """
         hp_sum = sum([self.read_hp(add) for add in [0xD16C, 0xD198, 0xD1C4, 0xD1F0, 0xD21C, 0xD248]])
         max_hp_sum = sum([self.read_hp(add) for add in [0xD18D, 0xD1B9, 0xD1E5, 0xD211, 0xD23D, 0xD269]])
         max_hp_sum = max(max_hp_sum, 1)
         return hp_sum / max_hp_sum
 
     def read_hp(self, start: int) -> int:
+        """Reads a 2-byte big-endian HP value from emulator memory.
+
+        Args:
+            start: Address of the high byte; the low byte is read from `start + 1`.
+
+        Returns:
+            The 16-bit HP value as an integer.
+        """
         return 256 * self.read_m(start) + self.read_m(start + 1)
 
     # built-in since python 3.10
     def bit_count(self, bits: int) -> int:
+        """Counts the number of set bits in an integer.
+
+        Equivalent to `int.bit_count()` introduced in Python 3.10.
+
+        Args:
+            bits: The integer whose set bits are to be counted.
+
+        Returns:
+            The number of `1` bits in the binary representation of `bits`.
+        """
         return bin(bits).count("1")
 
     def fourier_encode(self, val: float) -> np.ndarray:
+        """Encodes a scalar as an array of sine waves at exponentially increasing frequencies.
+
+        Args:
+            val: The scalar value to encode.
+
+        Returns:
+            A 1-D float64 array of length `enc_freqs` where element `i`
+            is `sin(val * 2**i)`.
+        """
         return np.sin(val * 2 ** np.arange(self.enc_freqs))
 
     def update_map_progress(self) -> None:
+        """Updates `max_map_progress` based on the player's current map index."""
         map_idx = self.read_m(0xD35E)
         self.max_map_progress = max(self.max_map_progress, self.get_map_progress(map_idx))
 
     def get_map_progress(self, map_idx: int) -> int:
+        """Returns the progress index of a map in the essential locations ordering.
+
+        Args:
+            map_idx: The game map ID to look up.
+
+        Returns:
+            The zero-based index of `map_idx` in `essential_map_locations`,
+            or `-1` if it is not present in that list.
+        """
         if map_idx in self.essential_map_locations.keys():
             return self.essential_map_locations[map_idx]
         else:
