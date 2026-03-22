@@ -46,7 +46,7 @@ def make_env(rank: int, env_conf: EnvConfig, seed: int = 0):
 if __name__ == "__main__":
     use_wandb_logging = True
     ep_length = 2048 * 80
-    sess_id = "poke-v2-run1"
+    sess_id = f"poke-v2-run-{datetime.now(UTC).strftime('%Y%m%d_%H%M')}"
     sess_path = Path("runs")
 
     env_config: EnvConfig = {
@@ -58,7 +58,7 @@ if __name__ == "__main__":
         "max_steps": ep_length,
         "print_rewards": True,
         "save_video": False,
-        "fast_video": True,
+        "fast_video": False,
         "session_path": sess_path,
         "gb_path": "../PokemonRed.gb",
         "debug": False,

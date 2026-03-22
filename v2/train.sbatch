@@ -5,7 +5,8 @@
 #SBATCH --time=24:00:00
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=64
+#SBATCH --cpus-per-task=16
+#SBATCH --export=WANDB_API_KEY
 #SBATCH --gpus=1
 #SBATCH -C gpu
 
