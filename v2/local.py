@@ -5,52 +5,22 @@ from pathlib import Path
 from typing import Any, cast
 
 from stable_baselines3 import PPO
+from red_gym_env_v2 import RedGymEnv
 from stable_baselines3.common.callbacks import BaseCallback, CallbackList, CheckpointCallback
-from stable_baselines3.common.utils import set_random_seed
-from stable_baselines3.common.vec_env import SubprocVecEnv
 from wandb.integration.sb3 import WandbCallback
 
 import wandb
-from red_gym_env_v2 import EnvConfig, RedGymEnv
-from stream_agent_wrapper import StreamWrapper
+from red_gym_env_v2 import EnvConfig
 from tensorboard_callback import TensorboardCallback
 
-
-def make_env(rank: int, env_conf: EnvConfig, seed: int = 0):
-    """
-    Utility function for multiprocessed env.
-    :param env_id: (str) the environment ID
-    :param num_env: (int) the number of environments you wish to have in subprocesses
-    :param seed: (int) the initial seed for RNG
-    :param rank: (int) index of the subprocess
-    """
-
-    def _init():
-        env = StreamWrapper(
-            RedGymEnv(env_conf),
-            stream_metadata={  # All of this is part is optional
-                "user": "marcus",  # choose your own username
-                "env_id": rank,  # environment identifier
-                "color": "#447799",  # choose your color :)
-                "extra": "extra-text",  # any extra text you put here will be displayed
-                "sprite_id": 10,
-            },
-        )
-        _ = env.reset(seed=(seed + rank))
-        return env
-
-    set_random_seed(seed)
-    return _init
-
-
 if __name__ == "__main__":
-    use_wandb_logging = True
+    use_wandb_logging = False
     ep_length = 2048 * 80
     sess_id = f"poke-v2-run-{datetime.now(UTC).strftime('%Y%m%d_%H%M')}"
     sess_path = Path("runs")
 
     env_config: EnvConfig = {
-        "headless": True,
+        "headless": False,
         "save_final_state": False,
         "early_stop": False,
         "action_freq": 24,
@@ -68,8 +38,8 @@ if __name__ == "__main__":
 
     print(env_config)
 
-    num_cpu = 64  # Also sets the number of episodes per training iteration
-    env = SubprocVecEnv([make_env(i, env_config) for i in range(num_cpu)])
+    num_cpu = 1  # Also sets the number of episodes per training iteration
+    env = RedGymEnv(env_config)
 
     checkpoint_callback = CheckpointCallback(save_freq=ep_length // 2, save_path=str(sess_path), name_prefix="poke")
 
@@ -77,7 +47,6 @@ if __name__ == "__main__":
 
     run = None
     if use_wandb_logging:
-        wandb.tensorboard.patch(root_logdir=str(sess_path))
         run = wandb.init(
             project="pokemon-train",
             id=sess_id,
@@ -96,7 +65,6 @@ if __name__ == "__main__":
         file_name = ""
     else:
         file_name = sys.stdin.read().strip()  # "runs/poke_26214400_steps"
-        print(f"Using checkpoint from {file_name}")
 
     train_steps_batch = ep_length // 64
 
