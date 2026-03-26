@@ -9,14 +9,13 @@
 #SBATCH --export=WANDB_API_KEY
 #SBATCH --gpus=1
 
-# create logs dir if it doesn't exist
 mkdir -p logs
+mkdir -p runs/checkpoints
 
 cd /mnt/data/PokemonRedExperiments/v2
 source .venv/bin/activate
 
-# if you want to resume from latest checkpoint (mirrors go_forever.sh logic)
-latest_file=$(ls -lt runs/*.zip 2>/dev/null | awk 'NR==1 {print $9}' | sed 's/\.zip$//')
+latest_file=$(ls -lt runs/checkpoints/*.zip 2>/dev/null | awk 'NR==1 {print $9}' | sed 's/\.zip$//')
 if [ -n "$latest_file" ]; then
     echo "Resuming from checkpoint: $latest_file"
     echo "$latest_file" | python baseline_fast_v2.py

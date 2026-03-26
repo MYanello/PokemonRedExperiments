@@ -163,6 +163,7 @@ class RedGymEnv(Env):
             config["gb_path"],
             # debugging=False,
             # disable_input=False,
+            sound_emulated=False,
             window=head,
         )
 
@@ -770,11 +771,11 @@ class RedGymEnv(Env):
         # https://github.com/pret/pokered/blob/91dc3c9f9c8fd529bb6e8307b58b96efa0bec67e/constants/event_constants.asm
         state_scores = {
             "event": self.reward_scale * self.update_max_event_reward() * 4,
-            # "level": self.reward_scale * self.get_levels_reward(),
+            "level": self.reward_scale * self.get_levels_reward(),
             "heal": self.reward_scale * self.total_healing_rew * 10,
             # "op_lvl": self.reward_scale * self.update_max_op_level() * 0.2,
             # "dead": self.reward_scale * self.died_count * -0.1,
-            "badge": self.reward_scale * self.get_badges() * 10,
+            "badge": self.reward_scale * self.get_badges() * 5,
             "explore": self.reward_scale * self.explore_weight * len(self.seen_coords) * 0.1,
             "stuck": self.reward_scale * self.get_current_coord_count_reward() * -0.05,
         }

@@ -96,3 +96,326 @@ wandb.errors.errors.CommError: HTTP 404: run PokemonRedExperiments/3vpc3dfs not 
 2026-03-11 18:07:08 INFO waiting for file pusher
 2026-03-11 18:07:09 INFO file stream finish called
 2026-03-11 18:07:10 INFO file stream finish is done
+2026-03-25 14:15:53 INFO watching files in: /tmp/tmpe9r6xmdp/files
+2026-03-25 14:15:53 INFO run started: 41pcddeb with start time 0.0
+2026-03-25 14:15:54 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/poke_ppo_14/events.out.tfevents.1774443160.slurm-rtx6000-244-175.171529.0
+2026-03-25 14:15:54 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/poke_ppo_13/events.out.tfevents.1774403998.slurm-rtx6000-244-175.125676.0
+2026-03-25 14:15:54 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/poke_ppo_15/events.out.tfevents.1774444503.slurm-rtx6000-244-175.186095.0
+2026-03-25 14:15:54 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1773247984.slurm-rtx6000-244-175.101959.1
+2026-03-25 14:15:54 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1773246585.slurm-rtx6000-244-175.87467.1
+2026-03-25 14:15:54 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/poke_ppo_13
+2026-03-25 14:15:54 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram
+2026-03-25 14:15:54 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/poke_ppo_15
+2026-03-25 14:15:54 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/poke_ppo_14
+2026-03-25 14:15:55 INFO Uploaded file /tmp/tmpi0iblav5wandb/lo0nxnxt-histogram/events.out.tfevents.1773246585.slurm-rtx6000-244-175.87467.1
+2026-03-25 14:15:55 INFO Uploaded file /tmp/tmpi0iblav5wandb/9vhstegs-histogram/events.out.tfevents.1773247984.slurm-rtx6000-244-175.101959.1
+2026-03-25 14:15:55 INFO Uploaded file /tmp/tmpi0iblav5wandb/cqlgfm8o-poke_ppo_13/events.out.tfevents.1774403998.slurm-rtx6000-244-175.125676.0
+2026-03-25 14:15:55 INFO Uploaded file /tmp/tmpi0iblav5wandb/8r782gjt-poke_ppo_15/events.out.tfevents.1774444503.slurm-rtx6000-244-175.186095.0
+2026-03-25 14:15:55 INFO Uploaded file /tmp/tmpi0iblav5wandb/npnuxnp4-poke_ppo_14/events.out.tfevents.1774443160.slurm-rtx6000-244-175.171529.0
+2026-03-25 14:15:55 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1773252074.slurm-rtx6000-244-175.183908.1
+2026-03-25 14:15:55 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774403998.slurm-rtx6000-244-175.125676.1
+2026-03-25 14:15:55 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774188217.slurm-rtx6000-244-175.75354.1
+2026-03-25 14:15:55 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774444503.slurm-rtx6000-244-175.186095.1
+2026-03-25 14:15:55 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774443160.slurm-rtx6000-244-175.171529.1
+2026-03-25 14:15:55 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774401744.slurm-rtx6000-244-175.110365.1
+2026-03-25 14:15:55 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774189021.slurm-rtx6000-244-175.82825.1
+2026-03-25 14:15:55 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774400611.slurm-rtx6000-244-175.94081.1
+2026-03-25 14:15:55 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774400493.slurm-rtx6000-244-175.93039.1
+2026-03-25 14:15:55 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1773248376.slurm-rtx6000-244-175.115640.1
+2026-03-25 14:15:55 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774400250.slurm-rtx6000-244-175.92163.1
+2026-03-25 14:15:55 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/poke_ppo_15/events.out.tfevents.1774444661.slurm-rtx6000-244-175.199703.0
+2026-03-25 14:15:55 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774444661.slurm-rtx6000-244-175.199703.1
+2026-03-25 14:15:55 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774401598.slurm-rtx6000-244-175.96765.1
+2026-03-25 14:15:55 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1773249145.slurm-rtx6000-244-175.129556.1
+2026-03-25 14:15:55 INFO file/dir modified: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/poke_ppo_15
+2026-03-25 14:15:55 INFO file/dir modified: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram
+2026-03-25 14:15:55 WARNING Connection pool is full, discarding connection: api.wandb.ai. Connection pool size: 10
+2026-03-25 14:15:55 WARNING Connection pool is full, discarding connection: api.wandb.ai. Connection pool size: 10
+2026-03-25 14:15:55 WARNING Connection pool is full, discarding connection: api.wandb.ai. Connection pool size: 10
+2026-03-25 14:15:55 WARNING Connection pool is full, discarding connection: api.wandb.ai. Connection pool size: 10
+2026-03-25 14:15:55 WARNING Connection pool is full, discarding connection: api.wandb.ai. Connection pool size: 10
+2026-03-25 14:15:55 INFO Uploaded file /tmp/tmpi0iblav5wandb/fkesgevl-histogram/events.out.tfevents.1773252074.slurm-rtx6000-244-175.183908.1
+2026-03-25 14:15:55 INFO Uploaded file /tmp/tmpi0iblav5wandb/bp0ui7gs-histogram/events.out.tfevents.1774444503.slurm-rtx6000-244-175.186095.1
+2026-03-25 14:15:55 INFO Uploaded file /tmp/tmpi0iblav5wandb/9bpjf5jd-histogram/events.out.tfevents.1774188217.slurm-rtx6000-244-175.75354.1
+2026-03-25 14:15:55 INFO Uploaded file /tmp/tmpi0iblav5wandb/vbe8dgbf-histogram/events.out.tfevents.1774443160.slurm-rtx6000-244-175.171529.1
+2026-03-25 14:15:55 INFO Uploaded file /tmp/tmpi0iblav5wandb/knwoof00-histogram/events.out.tfevents.1774403998.slurm-rtx6000-244-175.125676.1
+2026-03-25 14:15:56 INFO Uploaded file /tmp/tmpi0iblav5wandb/h0qs2ini-histogram/events.out.tfevents.1774400611.slurm-rtx6000-244-175.94081.1
+2026-03-25 14:15:56 INFO Uploaded file /tmp/tmpi0iblav5wandb/qmwbglt1-histogram/events.out.tfevents.1774401598.slurm-rtx6000-244-175.96765.1
+2026-03-25 14:15:56 INFO Uploaded file /tmp/tmpi0iblav5wandb/d0geqy44-poke_ppo_15/events.out.tfevents.1774444661.slurm-rtx6000-244-175.199703.0
+2026-03-25 14:15:56 INFO Uploaded file /tmp/tmpi0iblav5wandb/dm9m8jzg-histogram/events.out.tfevents.1774189021.slurm-rtx6000-244-175.82825.1
+2026-03-25 14:15:56 INFO Uploaded file /tmp/tmpi0iblav5wandb/po02f0ri-histogram/events.out.tfevents.1773248376.slurm-rtx6000-244-175.115640.1
+2026-03-25 14:15:56 WARNING Connection pool is full, discarding connection: storage.googleapis.com. Connection pool size: 10
+2026-03-25 14:15:56 INFO Uploaded file /tmp/tmpi0iblav5wandb/4xz4d9tw-histogram/events.out.tfevents.1773249145.slurm-rtx6000-244-175.129556.1
+2026-03-25 14:15:56 WARNING Connection pool is full, discarding connection: storage.googleapis.com. Connection pool size: 10
+2026-03-25 14:15:56 INFO Uploaded file /tmp/tmpi0iblav5wandb/qr8w4wgw-histogram/events.out.tfevents.1774444661.slurm-rtx6000-244-175.199703.1
+2026-03-25 14:15:56 WARNING Connection pool is full, discarding connection: storage.googleapis.com. Connection pool size: 10
+2026-03-25 14:15:56 INFO Uploaded file /tmp/tmpi0iblav5wandb/qk45gy6f-histogram/events.out.tfevents.1774400493.slurm-rtx6000-244-175.93039.1
+2026-03-25 14:15:56 WARNING Connection pool is full, discarding connection: storage.googleapis.com. Connection pool size: 10
+2026-03-25 14:15:56 INFO Uploaded file /tmp/tmpi0iblav5wandb/cgirk8hl-histogram/events.out.tfevents.1774401744.slurm-rtx6000-244-175.110365.1
+2026-03-25 14:15:56 WARNING Connection pool is full, discarding connection: storage.googleapis.com. Connection pool size: 10
+2026-03-25 14:15:56 INFO Uploaded file /tmp/tmpi0iblav5wandb/v0cc9xrh-histogram/events.out.tfevents.1774400250.slurm-rtx6000-244-175.92163.1
+2026-03-25 14:16:05 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_13/trajectory_explore_sum_40_6363faeacd378a0f7638.png
+2026-03-25 14:16:05 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_13/trajectory_explore_map_40_b70b6732fba4bf5123d2.png
+2026-03-25 14:16:05 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_13/trajectory_explore_map_65_58e6dbb0ffe214d0ef5f.png
+2026-03-25 14:16:05 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_15/trajectory_explore_sum_146_e8ab060882f2741644dc.png
+2026-03-25 14:16:05 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_13/trajectory_explore_sum_65_c3153bd3a4ed41777860.png
+2026-03-25 14:16:05 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_15/trajectory_explore_map_146_f04ee751f5f69dddb796.png
+2026-03-25 14:16:05 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images
+2026-03-25 14:16:05 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_15
+2026-03-25 14:16:05 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media
+2026-03-25 14:16:05 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_13
+2026-03-25 14:16:05 INFO Uploaded file /tmp/tmpi0iblav5wandb/7z6q9152-media/images/poke_ppo_13/trajectory_explore_sum_65_c3153bd3a4ed41777860.png
+2026-03-25 14:16:05 INFO Uploaded file /tmp/tmpi0iblav5wandb/jlwsm9vf-media/images/poke_ppo_13/trajectory_explore_map_40_b70b6732fba4bf5123d2.png
+2026-03-25 14:16:05 INFO Uploaded file /tmp/tmpi0iblav5wandb/zaqfpzot-media/images/poke_ppo_13/trajectory_explore_map_65_58e6dbb0ffe214d0ef5f.png
+2026-03-25 14:16:05 INFO Uploaded file /tmp/tmpi0iblav5wandb/20av735m-media/images/poke_ppo_15/trajectory_explore_sum_146_e8ab060882f2741644dc.png
+2026-03-25 14:16:05 INFO Uploaded file /tmp/tmpi0iblav5wandb/4046d8o9-media/images/poke_ppo_13/trajectory_explore_sum_40_6363faeacd378a0f7638.png
+2026-03-25 14:16:05 INFO Uploaded file /tmp/tmpi0iblav5wandb/qacwnd03-media/images/poke_ppo_15/trajectory_explore_map_146_f04ee751f5f69dddb796.png
+2026-03-25 14:16:06 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_15/trajectory_explore_map_170_882cf96e22c04e97d38a.png
+2026-03-25 14:16:06 INFO file/dir modified: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_15
+2026-03-25 14:16:06 INFO saving file poke_ppo_13/events.out.tfevents.1774403998.slurm-rtx6000-244-175.125676.0 with policy live
+2026-03-25 14:16:06 INFO saving file poke_ppo_14/events.out.tfevents.1774443160.slurm-rtx6000-244-175.171529.0 with policy live
+2026-03-25 14:16:06 INFO saving file histogram/events.out.tfevents.1773246585.slurm-rtx6000-244-175.87467.1 with policy live
+2026-03-25 14:16:06 INFO saving file poke_ppo_15/events.out.tfevents.1774444503.slurm-rtx6000-244-175.186095.0 with policy live
+2026-03-25 14:16:06 INFO saving file histogram/events.out.tfevents.1773247984.slurm-rtx6000-244-175.101959.1 with policy live
+2026-03-25 14:16:06 INFO saving file poke_ppo_15/events.out.tfevents.1774444661.slurm-rtx6000-244-175.199703.0 with policy live
+2026-03-25 14:16:06 INFO saving file histogram/events.out.tfevents.1773248376.slurm-rtx6000-244-175.115640.1 with policy live
+2026-03-25 14:16:06 INFO saving file histogram/events.out.tfevents.1773249145.slurm-rtx6000-244-175.129556.1 with policy live
+2026-03-25 14:16:06 INFO saving file histogram/events.out.tfevents.1773252074.slurm-rtx6000-244-175.183908.1 with policy live
+2026-03-25 14:16:06 INFO saving file histogram/events.out.tfevents.1774188217.slurm-rtx6000-244-175.75354.1 with policy live
+2026-03-25 14:16:06 INFO saving file histogram/events.out.tfevents.1774189021.slurm-rtx6000-244-175.82825.1 with policy live
+2026-03-25 14:16:06 INFO saving file histogram/events.out.tfevents.1774400250.slurm-rtx6000-244-175.92163.1 with policy live
+2026-03-25 14:16:06 INFO saving file histogram/events.out.tfevents.1774400493.slurm-rtx6000-244-175.93039.1 with policy live
+2026-03-25 14:16:06 INFO saving file histogram/events.out.tfevents.1774400611.slurm-rtx6000-244-175.94081.1 with policy live
+2026-03-25 14:16:06 INFO saving file histogram/events.out.tfevents.1774401598.slurm-rtx6000-244-175.96765.1 with policy live
+2026-03-25 14:16:06 INFO saving file histogram/events.out.tfevents.1774401744.slurm-rtx6000-244-175.110365.1 with policy live
+2026-03-25 14:16:06 INFO saving file histogram/events.out.tfevents.1774403998.slurm-rtx6000-244-175.125676.1 with policy live
+2026-03-25 14:16:06 INFO saving file histogram/events.out.tfevents.1774443160.slurm-rtx6000-244-175.171529.1 with policy live
+2026-03-25 14:16:06 INFO saving file histogram/events.out.tfevents.1774444503.slurm-rtx6000-244-175.186095.1 with policy live
+2026-03-25 14:16:06 INFO saving file histogram/events.out.tfevents.1774444661.slurm-rtx6000-244-175.199703.1 with policy live
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file media/images/poke_ppo_13/trajectory_explore_map_40_b70b6732fba4bf5123d2.png with policy now
+2026-03-25 14:16:06 INFO saving file media/images/poke_ppo_13/trajectory_explore_sum_40_6363faeacd378a0f7638.png with policy now
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file media/images/poke_ppo_13/trajectory_explore_map_65_58e6dbb0ffe214d0ef5f.png with policy now
+2026-03-25 14:16:06 INFO saving file media/images/poke_ppo_13/trajectory_explore_sum_65_c3153bd3a4ed41777860.png with policy now
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file media/images/poke_ppo_15/trajectory_explore_map_146_f04ee751f5f69dddb796.png with policy now
+2026-03-25 14:16:06 INFO saving file media/images/poke_ppo_15/trajectory_explore_sum_146_e8ab060882f2741644dc.png with policy now
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO saving file media/images/poke_ppo_15/trajectory_explore_map_170_882cf96e22c04e97d38a.png with policy now
+2026-03-25 14:16:06 INFO saving file media/images/poke_ppo_15/trajectory_explore_sum_170_e8ab060882f2741644dc.png with policy now
+2026-03-25 14:16:06 INFO saving file wandb-summary.json with policy end
+2026-03-25 14:16:06 INFO shutting down handler
+2026-03-25 14:16:06 INFO shutting down sender
+2026-03-25 14:16:06 INFO shutting down directory watcher
+2026-03-25 14:16:06 INFO Uploaded file /tmp/tmpi0iblav5wandb/z2q5lfii-media/images/poke_ppo_15/trajectory_explore_map_170_882cf96e22c04e97d38a.png
+2026-03-25 14:16:07 INFO Uploaded file /tmp/tmpi0iblav5wandb/ulzp6ofb-media/images/poke_ppo_13/trajectory_explore_map_40_b70b6732fba4bf5123d2.png
+2026-03-25 14:16:07 INFO Uploaded file /tmp/tmpi0iblav5wandb/m9n0yz10-media/images/poke_ppo_13/trajectory_explore_sum_40_6363faeacd378a0f7638.png
+2026-03-25 14:16:07 INFO Uploaded file /tmp/tmpi0iblav5wandb/m6rherkx-media/images/poke_ppo_13/trajectory_explore_map_65_58e6dbb0ffe214d0ef5f.png
+2026-03-25 14:16:07 INFO Uploaded file /tmp/tmpi0iblav5wandb/dpcia34l-media/images/poke_ppo_13/trajectory_explore_sum_65_c3153bd3a4ed41777860.png
+2026-03-25 14:16:07 INFO Uploaded file /tmp/tmpi0iblav5wandb/vbkwtpbh-media/images/poke_ppo_15/trajectory_explore_sum_170_e8ab060882f2741644dc.png
+2026-03-25 14:16:07 INFO Uploaded file /tmp/tmpi0iblav5wandb/k044bzj1-media/images/poke_ppo_15/trajectory_explore_map_146_f04ee751f5f69dddb796.png
+2026-03-25 14:16:07 INFO Uploaded file /tmp/tmpi0iblav5wandb/ao8rbsak-media/images/poke_ppo_15/trajectory_explore_sum_146_e8ab060882f2741644dc.png
+2026-03-25 14:16:07 INFO Uploaded file /tmp/tmpi0iblav5wandb/0kxs3hbm-media/images/poke_ppo_15/trajectory_explore_map_170_882cf96e22c04e97d38a.png
+2026-03-25 14:16:07 INFO file/dir created: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_15/trajectory_explore_sum_170_e8ab060882f2741644dc.png
+2026-03-25 14:16:07 INFO file/dir modified: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_15
+2026-03-25 14:16:07 INFO scan: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/poke_ppo_13/events.out.tfevents.1774403998.slurm-rtx6000-244-175.125676.0 poke_ppo_13/events.out.tfevents.1774403998.slurm-rtx6000-244-175.125676.0
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/poke_ppo_14/events.out.tfevents.1774443160.slurm-rtx6000-244-175.171529.0 poke_ppo_14/events.out.tfevents.1774443160.slurm-rtx6000-244-175.171529.0
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1773246585.slurm-rtx6000-244-175.87467.1 histogram/events.out.tfevents.1773246585.slurm-rtx6000-244-175.87467.1
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1773247984.slurm-rtx6000-244-175.101959.1 histogram/events.out.tfevents.1773247984.slurm-rtx6000-244-175.101959.1
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1773248376.slurm-rtx6000-244-175.115640.1 histogram/events.out.tfevents.1773248376.slurm-rtx6000-244-175.115640.1
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1773249145.slurm-rtx6000-244-175.129556.1 histogram/events.out.tfevents.1773249145.slurm-rtx6000-244-175.129556.1
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1773252074.slurm-rtx6000-244-175.183908.1 histogram/events.out.tfevents.1773252074.slurm-rtx6000-244-175.183908.1
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774188217.slurm-rtx6000-244-175.75354.1 histogram/events.out.tfevents.1774188217.slurm-rtx6000-244-175.75354.1
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774189021.slurm-rtx6000-244-175.82825.1 histogram/events.out.tfevents.1774189021.slurm-rtx6000-244-175.82825.1
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774400250.slurm-rtx6000-244-175.92163.1 histogram/events.out.tfevents.1774400250.slurm-rtx6000-244-175.92163.1
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774400493.slurm-rtx6000-244-175.93039.1 histogram/events.out.tfevents.1774400493.slurm-rtx6000-244-175.93039.1
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774400611.slurm-rtx6000-244-175.94081.1 histogram/events.out.tfevents.1774400611.slurm-rtx6000-244-175.94081.1
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774401598.slurm-rtx6000-244-175.96765.1 histogram/events.out.tfevents.1774401598.slurm-rtx6000-244-175.96765.1
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774401744.slurm-rtx6000-244-175.110365.1 histogram/events.out.tfevents.1774401744.slurm-rtx6000-244-175.110365.1
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774403998.slurm-rtx6000-244-175.125676.1 histogram/events.out.tfevents.1774403998.slurm-rtx6000-244-175.125676.1
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774443160.slurm-rtx6000-244-175.171529.1 histogram/events.out.tfevents.1774443160.slurm-rtx6000-244-175.171529.1
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774444503.slurm-rtx6000-244-175.186095.1 histogram/events.out.tfevents.1774444503.slurm-rtx6000-244-175.186095.1
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/histogram/events.out.tfevents.1774444661.slurm-rtx6000-244-175.199703.1 histogram/events.out.tfevents.1774444661.slurm-rtx6000-244-175.199703.1
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/poke_ppo_15/events.out.tfevents.1774444503.slurm-rtx6000-244-175.186095.0 poke_ppo_15/events.out.tfevents.1774444503.slurm-rtx6000-244-175.186095.0
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/poke_ppo_15/events.out.tfevents.1774444661.slurm-rtx6000-244-175.199703.0 poke_ppo_15/events.out.tfevents.1774444661.slurm-rtx6000-244-175.199703.0
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_13/trajectory_explore_map_40_b70b6732fba4bf5123d2.png media/images/poke_ppo_13/trajectory_explore_map_40_b70b6732fba4bf5123d2.png
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_13/trajectory_explore_sum_40_6363faeacd378a0f7638.png media/images/poke_ppo_13/trajectory_explore_sum_40_6363faeacd378a0f7638.png
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_13/trajectory_explore_map_65_58e6dbb0ffe214d0ef5f.png media/images/poke_ppo_13/trajectory_explore_map_65_58e6dbb0ffe214d0ef5f.png
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_13/trajectory_explore_sum_65_c3153bd3a4ed41777860.png media/images/poke_ppo_13/trajectory_explore_sum_65_c3153bd3a4ed41777860.png
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_15/trajectory_explore_map_146_f04ee751f5f69dddb796.png media/images/poke_ppo_15/trajectory_explore_map_146_f04ee751f5f69dddb796.png
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_15/trajectory_explore_sum_146_e8ab060882f2741644dc.png media/images/poke_ppo_15/trajectory_explore_sum_146_e8ab060882f2741644dc.png
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_15/trajectory_explore_map_170_882cf96e22c04e97d38a.png media/images/poke_ppo_15/trajectory_explore_map_170_882cf96e22c04e97d38a.png
+2026-03-25 14:16:07 INFO scan save: /tmp/tmpe9r6xmdp/wandb/run-20260325_141552-41pcddeb/files/media/images/poke_ppo_15/trajectory_explore_sum_170_e8ab060882f2741644dc.png media/images/poke_ppo_15/trajectory_explore_sum_170_e8ab060882f2741644dc.png
+2026-03-25 14:16:07 INFO shutting down file pusher
+2026-03-25 14:16:07 INFO waiting for file pusher
+2026-03-25 14:16:08 INFO Uploaded file /tmp/tmpi0iblav5wandb/0l08odwf-media/images/poke_ppo_15/trajectory_explore_sum_170_e8ab060882f2741644dc.png
+2026-03-25 14:16:08 INFO file stream finish called
+2026-03-25 14:16:35 INFO file stream finish is done

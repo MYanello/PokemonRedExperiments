@@ -25,6 +25,7 @@ dependencies = [
     "pandas>=2.2.3",
     "websockets>=13.1",
     "wandb>=0.25.1",
+    "setuptools>=82.0.1",
 ]
 
 [tool.pyright]

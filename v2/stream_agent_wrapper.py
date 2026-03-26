@@ -18,7 +18,7 @@ MAP_N_ADDRESS = 0xD35E
 
 logging.basicConfig(
     filename=os.path.join(os.path.dirname(__file__), "logs/stream_wrapper.log"),
-    level=logging.DEBUG,
+    level=logging.INFO,
     format="%(asctime)s [pid %(process)d] %(levelname)s: %(message)s",
 )
 

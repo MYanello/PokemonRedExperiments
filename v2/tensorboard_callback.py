@@ -40,12 +40,19 @@ class TensorboardCallback(BaseCallback):
     def _on_training_start(self) -> None:
         if self.writer is None:
             self.writer = SummaryWriter(log_dir=os.path.join(self.log_dir, "histogram"))
+        self.log_interval: int = 100000
 
     @override
     def _on_step(self) -> bool:
-        if self.training_env.env_method("check_if_done", indices=[0])[0]:
-            all_infos = cast(list[list[dict[str, Any]]], self.training_env.get_attr("agent_stats"))
-            all_final_infos = [stats[-1] for stats in all_infos]
+        episode_done = self.training_env.env_method("check_if_done", indices=[0])[0]
+        periodic = self.n_calls % self.log_interval == 0
+
+        if episode_done or periodic:
+            all_infos = cast(list[list[dict[str, Any]]],
+                self.training_env.get_attr("agent_stats"))
+            all_final_infos = [stats[-1] for stats in all_infos if len(stats) > 0]
+            if not all_final_infos:
+                return True
             mean_infos, distributions = merge_dicts(all_final_infos)
             # TODO log distributions, and total return
             for key, val in mean_infos.items():

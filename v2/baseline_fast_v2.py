@@ -63,21 +63,22 @@ if __name__ == "__main__":
         "gb_path": "../PokemonRed.gb",
         "debug": False,
         "reward_scale": 0.5,
-        "explore_weight": 0.25,
+        "explore_weight": 1.00,
     }
 
     print(env_config)
+    print(f"Session path: {sess_path}\n Session id: {sess_id}")
 
     num_cpu = 64  # Also sets the number of episodes per training iteration
     env = SubprocVecEnv([make_env(i, env_config) for i in range(num_cpu)])
 
-    checkpoint_callback = CheckpointCallback(save_freq=ep_length // 2, save_path=str(sess_path), name_prefix="poke")
+    checkpoint_callback = CheckpointCallback(save_freq=ep_length // 8, save_path=str(sess_path / "checkpoints"), name_prefix="poke", verbose=1)
 
     callbacks: list[BaseCallback] = [checkpoint_callback, TensorboardCallback(sess_path)]
 
     run = None
     if use_wandb_logging:
-        wandb.tensorboard.patch(root_logdir=str(sess_path))
+        wandb.tensorboard.patch(root_logdir=f"{sess_path}")
         run = wandb.init(
             project="pokemon-train",
             id=sess_id,
@@ -95,7 +96,7 @@ if __name__ == "__main__":
     if sys.stdin.isatty():
         file_name = ""
     else:
-        file_name = sys.stdin.read().strip()  # "runs/poke_26214400_steps"
+        file_name = sys.stdin.read().strip()  # "runs/checkpoints/poke_26214400_steps"
         print(f"Using checkpoint from {file_name}")
 
     train_steps_batch = ep_length // 64
@@ -119,7 +120,7 @@ if __name__ == "__main__":
             n_epochs=1,
             gamma=0.997,
             ent_coef=0.01,
-            tensorboard_log=str(sess_path),
+            tensorboard_log=str(sess_path / sess_id),
         )
 
     print(model.policy)
@@ -128,6 +129,7 @@ if __name__ == "__main__":
         total_timesteps=(ep_length) * num_cpu * 10000,
         callback=CallbackList(callbacks),
         tb_log_name="poke_ppo",
+        reset_num_timesteps=False,
     )
 
     if run is not None:

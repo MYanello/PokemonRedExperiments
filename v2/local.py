@@ -33,7 +33,7 @@ if __name__ == "__main__":
         "gb_path": "../PokemonRed.gb",
         "debug": False,
         "reward_scale": 0.5,
-        "explore_weight": 0.25,
+        "explore_weight": 1.0,
     }
 
     print(env_config)
